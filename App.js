@@ -1,20 +1,41 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, ListView, Text, View, Button, Alert, Icon} from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator , StackNavigator} from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 export default class App extends React.Component {
   render() {
     return (
-      <Tabs />
+      <StackNav />
     );
   }
 }
-const ListDecks = () => (
-  <View>
-    <Text>List of Decks! ..................</Text>
-  </View>
-);
+
+class ListDecks extends React.Component {
+  static navigationOptions = {
+    title: 'Welcome'
+  };
+  render() {
+    return (
+      <View>
+      <Text>List of Decks! ..................</Text>
+      <Button
+      onPress={() => this.props.navigation.navigate('DeckView')}
+      title="Click Deck"
+    />
+    </View>
+    );
+  }
+}
+class DeckView extends React.Component {
+  render() {
+    return (
+      <View>
+      <Text>Deck! ..................</Text>
+    </View>
+    );
+  }
+}
 
 const AddDeck = () => (
   <View>
@@ -27,14 +48,29 @@ const Tabs = TabNavigator({
     screen: ListDecks,
     navigationOptions: {
       tabBarLabel: 'Decks',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />
+      tabBarIcon: ({ tintColor, focused }) => <Ionicons name={focused ? 'ios-home':'ios-home-outline'} size={30} color={tintColor} />
     },
   },
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
       tabBarLabel: 'Add Deck',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-add' size={30} color={tintColor} />
+      tabBarIcon: ({ tintColor, focused,  }) => <Ionicons name={ focused ? 'ios-add':'ios-add-outline'} size={30} color={tintColor} />
     },
+  },
+})
+
+const StackNav = StackNavigator({
+  Home: { 
+    screen: Tabs,
+    navigationOptions: {
+    title: 'Decks',
+    },
+  },
+  DeckView: { 
+     screen: DeckView ,
+     navigationOptions: {
+     title: 'Add Deck'
+     }
   },
 })
