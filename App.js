@@ -41,7 +41,7 @@ export default class App extends React.Component {
 
 class ListDecks extends React.Component {
   static navigationOptions = {
-    title: 'Welcome'
+    title: 'Decks'
   };
   
   render() {
@@ -55,8 +55,7 @@ class ListDecks extends React.Component {
             key={i}
             title={obj[t].title}
             badge={{ value: 3, textStyle: { color: 'white' } }}
-            button={{title:"hello"}}
-            onPress={() => this.props.navigation.navigate('DeckView')}
+            onPress={() => this.props.navigation.navigate('DeckView', {title:obj[t].title})}
             />
         );
       })
@@ -67,21 +66,34 @@ class ListDecks extends React.Component {
   }
 }
 class DeckView extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.title}`,
+  });
+
   render() {
+    const { params } = this.props.navigation.state;
     return (
       <View>
-      <Text>Deck! ..................</Text>
+      <Text>Deck! .................. {params.title}</Text>
 
     </View>
     );
   }
 }
 
-const AddDeck = () => (
+class AddDeck extends React.Component{ 
+  static navigationOptions = {
+    title: 'Add Deck'
+  };
+  render(){
+   return (
+  
   <View>
     <Text>Add New Deck! .....................</Text>
   </View>
-);
+)
+  }
+}
 
 const Tabs = TabNavigator({
   ListDecks: {
@@ -104,13 +116,12 @@ const StackNav = StackNavigator({
   Home: { 
     screen: Tabs,
     navigationOptions: {
-    title: 'Decks',
     },
   },
   DeckView: { 
      screen: DeckView ,
      navigationOptions: {
-     title: 'Add Deck'
+     title: 'Deck View'
      }
-  },
+  }
 })
