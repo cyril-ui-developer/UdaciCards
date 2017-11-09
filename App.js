@@ -1,7 +1,35 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View, Button, Alert, Icon} from 'react-native';
+import { ActivityIndicator, ListView, Text, View, Button, Alert, Icon, TouchableOpacity} from 'react-native';
 import { TabNavigator , StackNavigator} from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { Card, ListItem } from 'react-native-elements'
+
+const obj = {
+  React: {
+    title: 'React',
+    questions: [
+      {
+        question: 'What is React?',
+        answer: 'A library for managing user interfaces'
+      },
+      {
+        question: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event'
+      }
+    ]
+  },
+  JavaScript: {
+    title: 'JavaScript',
+    questions: [
+      {
+        question: 'What is a closure?',
+        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+      }
+    ]
+  }
+}
+
+const objKeys = Object.keys(obj)
 
 export default class App extends React.Component {
   render() {
@@ -15,14 +43,25 @@ class ListDecks extends React.Component {
   static navigationOptions = {
     title: 'Welcome'
   };
+  
   render() {
     return (
       <View>
-      <Text>List of Decks! ..................</Text>
-      <Button
-      onPress={() => this.props.navigation.navigate('DeckView')}
-      title="Click Deck"
-    />
+      <Card>
+      {
+      objKeys.map((t, i) => {
+        return (
+          <ListItem
+            key={i}
+            title={obj[t].title}
+            badge={{ value: 3, textStyle: { color: 'white' } }}
+            button={{title:"hello"}}
+            onPress={() => this.props.navigation.navigate('DeckView')}
+            />
+        );
+      })
+    }
+    </Card>
     </View>
     );
   }
@@ -32,6 +71,7 @@ class DeckView extends React.Component {
     return (
       <View>
       <Text>Deck! ..................</Text>
+
     </View>
     );
   }
