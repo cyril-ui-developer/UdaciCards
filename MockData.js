@@ -11,16 +11,16 @@ export const mockData = {
           answer: 'The componentDidMount lifecycle event'
         }
       ]
-    }, React2: {
-      title: 'React2',
+    }, Angular: {
+      title: 'Angular',
       questions: [
         {
-          question: 'What is React?',
+          question: 'What is Angular?',
           answer: 'A library for managing user interfaces'
         },
         {
-          question: 'Where do you make Ajax requests in React?',
-          answer: 'The componentDidMount lifecycle event'
+          question: 'How is Ajax requests done in Angular?',
+          answer: 'Angular Make use of http module'
         }
       ]
     },

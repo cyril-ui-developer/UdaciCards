@@ -4,11 +4,13 @@ import { Card, ListItem, FormLabel, FormInput, FormValidationMessage } from 'rea
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
 import { mockData } from './MockData';
+import { AsyncMockData } from './Async';
 
 export class ListDecks extends React.Component {
     
       constructor(props){
         super(props);
+        const data = AsyncMockData();
         this.state = { decks:mockData}
     
       }
@@ -17,7 +19,8 @@ export class ListDecks extends React.Component {
       };
     
       render() {
-         const decksKeys = Object.keys(this.state.decks)
+         const decksKeys = Object.keys(this.props.screenProps)
+         console.log(this.props.screenProps)
         return (
           <View>
           <Card>
@@ -26,9 +29,9 @@ export class ListDecks extends React.Component {
             return (
               <ListItem
                 key={i}
-                title={this.state.decks[t].title}
-                badge={{ value: this.state.decks[t].questions.length, textStyle: { color: 'white' } }}
-              onPress={() => this.props.navigation.navigate('DeckView', {title:this.state.decks[t].title})} 
+                title={this.props.screenProps[t].title}
+                badge={{ value: this.props.screenProps[t].questions.length, textStyle: { color: 'white' } }}
+              onPress={() => this.props.navigation.navigate('DeckView', {title:this.props.screenProps[t].title})} 
                 />
             );
           })

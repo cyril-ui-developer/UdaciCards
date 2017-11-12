@@ -10,11 +10,12 @@ import { StackNav } from './StackNav';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { decks:mockData}
    }
   
   render() {
     return (
-      <StackNav screenProps={mockData} />
+      <StackNav screenProps={this.state.decks} />
     );
   }
 }
@@ -32,24 +33,24 @@ const styles = StyleSheet.create({
 
 
 
-let Tasks = {
-    convertToArrayOfObject(tasks, callback) {
-      console.log(tasks)
-      return callback(
-        tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
-      );
-    },
-    convertToStringWithSeparators(tasks) {
-      return tasks.map(task => task.text).join("||");
-    },
-    all(callback) {
-      return AsyncStorage.getItem("TASKS", (err, tasks) =>{
-        this.convertToArrayOfObject(tasks, callback)
-        console.log(tasks)
-      });
-    },
-    save(tasks) {
-      console.log(tasks)
-      AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(tasks));
-    }
-  };
+// let Tasks = {
+//     convertToArrayOfObject(tasks, callback) {
+//       console.log(tasks)
+//       return callback(
+//         tasks ? tasks.split("||").map((task, i) => ({ key: i, text: task })) : []
+//       );
+//     },
+//     convertToStringWithSeparators(tasks) {
+//       return tasks.map(task => task.text).join("||");
+//     },
+//     all(callback) {
+//       return AsyncStorage.getItem("TASKS", (err, tasks) =>{
+//         this.convertToArrayOfObject(tasks, callback)
+//         console.log(tasks)
+//       });
+//     },
+//     save(tasks) {
+//       console.log(tasks)
+//       AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(tasks));
+//     }
+//   };
