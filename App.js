@@ -5,17 +5,29 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Card, ListItem, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import { mockData } from './MockData';
 import { StackNav } from './StackNav';
+import { MainApp } from './Main'
+import { UserForm } from './UserForm';
+
 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { decks:mockData}
+    this. updateList() 
    }
-  
+   updateList() {
+  //  dataListOrder = getOrder(dataList);
+    this.setState({
+      decks: this.state.decks
+    });
+  }
   render() {
     return (
-      <StackNav screenProps={this.state.decks} />
+      <StackNav screenProps={this.state.decks}  />
+      // <MainApp />
+      // <UserForm /> 
+    
     );
   }
 }
