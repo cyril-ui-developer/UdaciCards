@@ -1,124 +1,64 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, ListView, Text, View, Alert,Button, Icon, TouchableOpacity,TextInput, AsyncStorage,StyleSheet} from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView,ListView, Text, View, Alert, Icon, TouchableOpacity,TextInput, AsyncStorage,StyleSheet} from 'react-native';
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Card, ListItem, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation'
+import { saveDeck }  from './Async';
+import Button from './Button';
+import Styles from './styles';
 
-function SubmitBtn ({ onPress }) {
-  return (
-    <TouchableOpacity
-      onPress={onPress}>
-        <Text>SUBMIT</Text>
-    </TouchableOpacity>
-  )
-}
-
-// function submitDeck ( title ) {
-//   return AsyncStorage.mergeItem(obj, JSON.stringify({
-//    title: title
-   
-//  }))
-//  console.log(title)
-// }
 
 export class AddDeck extends React.Component{ 
-    static navigationOptions = {
-      title: 'Add Deck'
-    };
-    constructor(props) {
-      super(props);
-      this.state = {text: '', disableSubmit:false};
-    }
+  static navigationOptions = {
+    title: 'Add Deck'
+  };
+
+  state = {
+    title: ''
+  };
+
+createDeck = () => {
+    saveDeck(this.state.title)
+        .then(deck => {
+
+            const resetAction = NavigationActions.reset({
+              index: 0,
+              actions: [
+                NavigationActions.navigate({ routeName: 'ListDecks'})
+              ]
+            })
+            this.props.navigation.dispatch(resetAction)
+        
+        });
+};
   
-    changeTextHandler = text => {
-      this.setState({ text: text });
-    };
-  
-
-
-
-    submitDeck(title){
-     // let title = event.nativeEvent.text;
-   //  console.log(title)
+    render(){
+      const { title } = this.state;
  
-   this.state.decks = Object.assign(this.props.screenProps, {[title]:{title:title}})
-     console.log(this.state.decks)
-     this.props.navigation.dispatch(NavigationActions.setParams({
-      params: this.state.decks,
-      key: 'screen-123',
-      action: NavigationActions.navigate(this.state.decks)
-    }))
-   // this.props.updateList(this.state.decks)
+        return (
+            <KeyboardAvoidingView behavior={'padding'} style={{flex: 1}}>
+                <View style={styles.container}>
+                    <Text style={[styles.title, {marginBottom: 30}]}>Add New Deck Title</Text>
+                    <TextInput value={title} placeholder="Enter new deck title" onChangeText={text => this.setState({title: text})} autoFocus={true} style={[Styles.inputText, {alignSelf: 'stretch', marginBottom: 30}]} />
+                    <Button text="Create Deck" onPress={this.createDeck} disabled={title.length === 0}/>
+                </View>
+            </KeyboardAvoidingView>
+        )
     }
     
-    state = {}; 
-    renderTextfield(options) { 
-        return ( 
-          <TextInput 
-            style={styles.textfield} 
-            onChangeText={(value) => this.setState({ [options.name]: value })} 
-            placeholder={options.label} 
-            value={this.state[options.name]} 
-            keyboardType={options.keyboard || 'default'} 
-          /> 
-        ); 
-      }
-      renderButton() { 
-        return ( 
-          <TouchableOpacity 
-            onPress={this.onPressButton} 
-            style={styles.btn}> 
-            <Text style={styles.btnText}>Save</Text> 
-          </TouchableOpacity> 
-        ); 
-      } 
-
-      onPressButton = () => { 
-        const { deck, decks } = this.state; 
-        this.submitDeck(deck)
-        console.log(decks )
-        Alert.alert("User's data",`Deck: ${deck}`); 
-        this.setState({deck:""})
-      } 
-
-    render(){
-     return (
-    <View>
-     <FormLabel>Enter new deck</FormLabel>
-         {this.renderTextfield({ name:'deck', label: 'Enter Deck'})} 
-         {this.renderButton()} 
-    </View>
-  )
-    }
   
   
   }
 
-  const styles = StyleSheet.create({ 
-    panel: { 
-      backgroundColor: '#fff', 
-      borderRadius: 3, 
-      padding: 10, 
-      marginBottom: 20, 
-    }, 
-    instructions: { 
-      color: '#bbb', 
-      fontSize: 16, 
-      marginTop: 15, 
-      marginBottom: 10, 
-    },     textfield: { 
-        height: 40, 
-        marginBottom: 10, 
-      }, 
-      btn: { 
-        backgroundColor: '#34495e', 
-        borderRadius: 3, 
-        padding: 12, 
-        flex: 1, 
-      }, 
-      btnText: { 
-        textAlign: 'center', 
-        color: '#fff', 
-        fontSize: 16, 
-      },
-  });
+  const styles = StyleSheet.create({
+   container: {
+       flex: 1,
+       padding: 30,
+       alignItems: 'center',
+       justifyContent: 'center'
+   },
+    title: {
+        fontSize: 35,
+        textAlign: 'center'
+    }
+});
