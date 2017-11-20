@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { AsyncStorage,StyleSheet} from 'react-native';
 import Uuid from 'uuid-lib';
-
 import { mockData } from './MockData';
-const DECKS_KEY = 'decks:keysssss';
+
+const DECKS_KEY = 'decks:ke';
 
 export function getDecks() {
         return AsyncStorage.getItem(DECKS_KEY).then(data => {

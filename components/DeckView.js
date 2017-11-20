@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { ActivityIndicator, KeyboardAvoidingView,  DeviceEventEmitter, ListView, Text, View, Alert, Icon, TouchableOpacity,TextInput, AsyncStorage,StyleSheet} from 'react-native';
 import { Card, ListItem, FormLabel, Badge, FormInput, FormValidationMessage  } from 'react-native-elements'
 
-import { mockData } from './MockData';
-import { getDeck } from './Async';
+import { mockData } from '../MockData';
+import { getDeck } from '../Async';
 import Button from './Button';
 import { AddCardToDeck } from "./AddCardToDeck";
 

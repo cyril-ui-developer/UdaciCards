@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, StyleSheet, DeviceEventEmitter } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import Styles from './styles';
-import { addCardToDeck } from './Async';
+import Styles from '../styles';
+import { addCardToDeck } from '../Async';
 import Button from './Button';
 
 export class AddCardToDeck extends Component {

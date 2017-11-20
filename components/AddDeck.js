@@ -3,9 +3,9 @@ import { ActivityIndicator, KeyboardAvoidingView,ListView, Text, View, Alert, Ic
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Card, ListItem, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation'
-import { saveDeck }  from './Async';
+import { saveDeck }  from '../Async';
 import Button from './Button';
-import Styles from './styles';
+import Styles from '../styles';
 
 
 export class AddDeck extends React.Component{ 

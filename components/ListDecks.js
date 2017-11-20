@@ -3,8 +3,8 @@ import { ActivityIndicator,DeviceEventEmitter, ListView, Text, View, Alert,Butto
 import { Card, ListItem, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
-import { mockData } from './MockData';
-import { getDecks } from './Async';
+import { mockData } from '../MockData';
+import { getDecks } from '../Async';
 
 export class ListDecks extends React.Component {
     

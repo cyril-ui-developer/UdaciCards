@@ -3,8 +3,8 @@ import { ActivityIndicator, ListView, Text, View, Alert,Button, Icon, TouchableO
 import { TabNavigator , StackNavigator} from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
-import { ListDecks } from './ListDecks';
-import { AddDeck } from './AddDeck';
+import { ListDecks } from '../components/ListDecks';
+import { AddDeck } from '../components/AddDeck';
 
 export const Tabs = TabNavigator({
   ListDecks: {

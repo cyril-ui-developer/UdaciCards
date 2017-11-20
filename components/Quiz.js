@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import FlipCard from 'react-native-flip-card';
-import { getDeck } from './Async';
-import Styles from './styles';
+import { getDeck } from '../Async';
+import Styles from '../styles';
 import Score from './Score';
-import { clearLocalNotification, setLocalNotification } from './Notifications';
-
+import { clearLocalNotification, setLocalNotification } from '../helpers/Notifications';
 import Button from './Button';
 
 export class Quiz extends Component {
@@ -76,11 +75,11 @@ export class Quiz extends Component {
                         <View style={{height: 0}}>
                             <FlipCard style={{borderWidth: 0}} flip={true} flipVertical={true}>
                                 <View style={{alignItems: 'center'}}>
-                                    <Text style={styles.subtitle}>Question</Text>
+                                    <Text style={styles.subtitle}>Show Question</Text>
                                     <Text style={styles.title}>{question.answer}</Text>
                                 </View>
                                 <View style={{alignItems: 'center'}}>
-                                    <Text style={styles.subtitle}>Answer</Text>
+                                    <Text style={styles.subtitle}>Show Answer</Text>
                                     <Text style={styles.title}>{question.question}</Text>
                                 </View>
                             </FlipCard>

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { ActivityIndicator, ListView, Text, View, Alert,Button, Icon, TouchableOpacity,TextInput, AsyncStorage,StyleSheet} from 'react-native';
 import { TabNavigator , StackNavigator} from 'react-navigation';
 
-import { ListDecks } from './ListDecks';
-import { DeckView } from './DeckView';
-import {Tabs } from './Tabs';
-import { AddCardToDeck } from "./AddCardToDeck";
-import { AddDeck } from './AddDeck';
-import { Quiz } from './Quiz';
+import { ListDecks } from '../components/ListDecks';
+import { DeckView } from '../components/DeckView';
+import {Tabs } from '../navigations/Tabs';
+import { AddCardToDeck } from "../components/AddCardToDeck";
+import { AddDeck } from '../components/AddDeck';
+import { Quiz } from '../components/Quiz';
 
 export const StackNav = StackNavigator({
     ListDecks: { 
