@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
         borderColor: '#ccc'
     },
     invertedButton: {
-        backgroundColor: "blue"
+        backgroundColor: "#708090",
+        borderColor:"#708090"
     },
     buttonText: {
         color: "#fff",

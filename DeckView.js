@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, KeyboardAvoidingView, Button , DeviceEventEmitter, ListView, Text, View, Alert, Icon, TouchableOpacity,TextInput, AsyncStorage,StyleSheet} from 'react-native';
-import { Card, ListItem, FormLabel, FormInput, FormValidationMessage, PricingCard  } from 'react-native-elements'
+import { ActivityIndicator, KeyboardAvoidingView,  DeviceEventEmitter, ListView, Text, View, Alert, Icon, TouchableOpacity,TextInput, AsyncStorage,StyleSheet} from 'react-native';
+import { Card, ListItem, FormLabel, Badge, FormInput, FormValidationMessage  } from 'react-native-elements'
 
 import { mockData } from './MockData';
 import { getDeck } from './Async';
-//import Button from './Button';
+import Button from './Button';
+import { AddCardToDeck } from "./AddCardToDeck";
 
 export class DeckView extends React.Component {
     static navigationOptions = ({ navigation }) => ({
@@ -37,6 +38,19 @@ export class DeckView extends React.Component {
     console.log(deckId)
       getDeck(title).then(deck => this.setState({deck}));
   };
+  addCard = () => {
+    const { navigation } = this.props;
+    const { title } = navigation.state.params;
+
+    navigation.navigate('AddCardToDeck', {title});
+};
+
+startQuiz = () => {
+    const { navigation } = this.props;
+    const { title } = navigation.state.params;
+
+    this.props.navigation.navigate('Quiz', {title});
+};
 
     render() {
       const { params } = this.props.navigation.state;
@@ -49,44 +63,19 @@ export class DeckView extends React.Component {
       return (
       
    
-   <View style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-
-        <PricingCard
-               color='#4f9deb'
-               title={deck.title}
-               price={deck.questions.length}
-               info={['Add card and/or take a quiz']}
-               button={{ title: 'START QUIZ', icon: 'flight-takeoff' }}
-               onButtonPress={this._onPressButton}
-             />
-             <Button
-             onPress={this._onPressButton}
-             title="Create Card"
-           />
-           {/* <Card title={deck.title}>
-                <Text style={{marginBottom: 10}}>
-                  The idea with React Native Elements is more about component structure than actual design.
-                </Text>
-                <Button
-                  icon={{name: 'code'}}
-                  backgroundColor='blue'
-                  color="#fff"
-                  fontFamily='Lato'
-                  buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 10}}
-                  title='YES' />
-                <Button
-                  icon={{name: 'code'}}
-                  backgroundColor='red'
-                  fontFamily='Lato'
-                  buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginTop: 10}}
-                  title='NO' /> 
-          </Card> */}
-           </View>
+   <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'center'}}>
+           <Card  title={deck.title}>
+           <Badge value= {deck.questions.length} textStyle={{ color: '#fff' , fontSize: 25}}/>
+           <Text style={{marginBottom: 10}}>
+                Create a Card and/or take a Quiz
+           </Text>
+          </Card>
+    
+          <View style={styles.buttonsContainer}>
+                    <Button text="Add Card" onPress={this.addCard} style={{marginBottom: 15}} inverted/>
+                    <Button text="Start Quiz" disabled={deck.questions.length === 0} onPress={this.startQuiz}/>
+          </View>
+   </View>
       
           
 
@@ -95,4 +84,28 @@ export class DeckView extends React.Component {
   }
 
 
-          
+  const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    textsContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonsContainer: {
+         marginTop: 15,
+        marginBottom: 15,
+        width: 200
+    },
+    title: {
+        fontSize: 60,
+        fontWeight: 'bold',
+        paddingBottom: 10
+    },
+    subtitle: {
+        color: 'grey',
+        fontSize: 20
+    }
+});

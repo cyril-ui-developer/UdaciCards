@@ -45,9 +45,6 @@ createDeck = () => {
             </KeyboardAvoidingView>
         )
     }
-    
-  
-  
   }
 
   const styles = StyleSheet.create({

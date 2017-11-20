@@ -49,3 +49,16 @@ export function getDeck(id) {
         return null;
     });
 }
+
+export function addCardToDeck(id, card) {
+    return AsyncStorage.getItem(DECKS_KEY).then(data => {
+        const storedData = JSON.parse(data);
+
+        storedData[id].questions.push(card);
+
+        return AsyncStorage.setItem(DECKS_KEY, JSON.stringify(storedData));
+    }).catch(err => {
+        console.error('Error', err);
+        return null;
+    });
+}
