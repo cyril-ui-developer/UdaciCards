@@ -139,7 +139,9 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "#666",
     padding: 10,
-    color: "#fff"
+    color: "#fff",
+    borderWidth:3,
+    borderColor:"#444"
   },
   subtitle: {
     color: "grey",

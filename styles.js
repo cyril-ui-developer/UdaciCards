@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 22,
         borderWidth: 1,
-        borderColor: "#444"
+        borderColor: "#444",
+        borderRadius:20,
     },
     disabledButton: {
         backgroundColor: '#ccc',
