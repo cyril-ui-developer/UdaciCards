@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { AsyncStorage, StyleSheet } from "react-native";
 import { mockData } from "./MockData";
 
-const DECKS_KEY = "decks:ke";
+const DECKS_KEY = "decks:key";
 
 export function getDecks() {
   return AsyncStorage.getItem(DECKS_KEY)
