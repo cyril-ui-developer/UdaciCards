@@ -4,7 +4,6 @@ import { NavigationActions } from "react-navigation";
 import FlipCard from "react-native-flip-card";
 import { getDeck } from "../Async";
 import Styles from "../styles";
-import Score from "./Score";
 import {
   clearLocalNotification,
   setLocalNotification

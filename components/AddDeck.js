@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import {
-  ActivityIndicator,
   KeyboardAvoidingView,
   ListView,
   Text,
   View,
-  Alert,
   Icon,
   TouchableOpacity,
   TextInput,
-  AsyncStorage,
   StyleSheet
 } from "react-native";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
