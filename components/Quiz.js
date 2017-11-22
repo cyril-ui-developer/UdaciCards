@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight } from "react-native";
 import { NavigationActions } from "react-navigation";
 import FlipCard from "react-native-flip-card";
 import { getDeck } from "../Async";
@@ -10,6 +10,7 @@ import {
 } from "../helpers/Notifications";
 import Button from "./Button";
 import QuestionAnswer from "./QuestionAnswer";
+
 
 export class Quiz extends Component {
   state = {
@@ -24,7 +25,6 @@ export class Quiz extends Component {
 
   loadDeck = () => {
     const { title } = this.props.navigation.state.params;
-    console.log(title);
     getDeck(title).then(deck => this.setState({ deck }));
   };
 
@@ -54,6 +54,17 @@ export class Quiz extends Component {
       };
     });
   }
+//   navigateToListDecks(){
+//     const resetAction = NavigationActions.reset({
+//         index: 0,
+//         actions: [
+//           NavigationActions.navigate({
+//             routeName: "ListDecks"
+//           })
+//         ]
+//       });
+//       this.props.navigation.dispatch(resetAction);
+//   }
 
   render() {
     const { deck, currentQuestion, score } = this.state;
@@ -68,6 +79,9 @@ export class Quiz extends Component {
 
     return (
       <View style={styles.container}>
+        {/* <TouchableHighlight onPress={ () => this.navigateToListDecks() } style={{marginLeft:-280}}>
+            <Text>GO To ListDecks</Text>
+        </TouchableHighlight> */}
         {!showScore && (
           <Text style={styles.topLeftText}>
             {currentQuestion + 1} / {questonsCount}

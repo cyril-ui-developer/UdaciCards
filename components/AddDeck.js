@@ -43,6 +43,9 @@ export class AddDeck extends React.Component {
         ]
       });
       this.props.navigation.dispatch(resetAction);
+    //   this.props.navigation.navigate("ListView", {
+    //     title:this.state.title
+    //   })
     });
   };
 
@@ -51,6 +54,7 @@ export class AddDeck extends React.Component {
 
     return (
       <KeyboardAvoidingView behavior={"padding"} style={{ flex: 1 }}>
+
         <View style={styles.container}>
           <Text style={[styles.title, { marginBottom: 30 }]}>
             Add New Deck Title
@@ -68,8 +72,10 @@ export class AddDeck extends React.Component {
           <Button
             text="Create Deck"
             onPress={this.createDeck}
+       
             disabled={title.length === 0}
           />
+          
         </View>
       </KeyboardAvoidingView>
     );

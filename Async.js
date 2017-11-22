@@ -15,13 +15,12 @@ export function getDecks() {
       }
     })
     .catch(err => {
-      console.error("Error", err);
+      console.error("Error getting decks", err);
       return null;
     });
 }
 
 export function saveDeck(title) {
-  console.log(title);
   return AsyncStorage.getItem(DECKS_KEY)
     .then(data => {
       const backedUpData = JSON.parse(data);
@@ -39,7 +38,7 @@ export function saveDeck(title) {
       });
     })
     .catch(err => {
-      console.error("Error", err);
+      console.error("Error saving deck", err);
       return null;
     });
 }
@@ -51,7 +50,7 @@ export function getDeck(id) {
       return decks[id];
     })
     .catch(err => {
-      console.error(`Error`, err);
+      console.error(`Error retriving deck`, err);
       return null;
     });
 }
@@ -66,7 +65,8 @@ export function addCardToDeck(id, card) {
       return AsyncStorage.setItem(DECKS_KEY, JSON.stringify(storedData));
     })
     .catch(err => {
-      console.error("Error", err);
+      console.error("Error adding card to decks", err);
       return null;
     });
 }
+

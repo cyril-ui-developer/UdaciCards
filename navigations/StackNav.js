@@ -13,17 +13,16 @@ import {
   StyleSheet
 } from "react-native";
 import { TabNavigator, StackNavigator } from "react-navigation";
-
 import { ListDecks } from "../components/ListDecks";
 import { DeckView } from "../components/DeckView";
-import { Tabs } from "../navigations/Tabs";
+//import { Tabs } from "../navigations/Tabs";
 import { AddCardToDeck } from "../components/AddCardToDeck";
 import { AddDeck } from "../components/AddDeck";
 import { Quiz } from "../components/Quiz";
 
 export const StackNav = StackNavigator({
   ListDecks: {
-    screen: Tabs,
+    screen: ListDecks,
     navigationOptions: {}
   },
   DeckView: {

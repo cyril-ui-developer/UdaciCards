@@ -21,7 +21,6 @@ export class AddCardToDeck extends Component {
     const { question, answer } = this.state;
     const { navigation } = this.props;
     const { title } = navigation.state.params;
-    console.log(title);
     addCardToDeck(title, { question, answer }).then(() => {
       DeviceEventEmitter.emit("onDataChangedEvent", {});
       navigation.dispatch(NavigationActions.back());

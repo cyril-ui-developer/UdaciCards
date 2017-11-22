@@ -11,7 +11,8 @@ import {
   TouchableOpacity,
   TextInput,
   AsyncStorage,
-  StyleSheet
+  StyleSheet,
+  TouchableHighlight
 } from "react-native";
 import {
   Card,
@@ -21,6 +22,7 @@ import {
   FormInput,
   FormValidationMessage
 } from "react-native-elements";
+import { NavigationActions } from "react-navigation";
 
 import { mockData } from "../MockData";
 import { getDeck } from "../Async";
@@ -42,21 +44,23 @@ export class DeckView extends React.Component {
 
   componentWillMount() {
     DeviceEventEmitter.addListener("onDataChangedEvent", this.loadDeck);
+
   }
 
   componentDidMount() {
     this.loadDeck();
+
   }
 
   componentWillUnmount() {
     DeviceEventEmitter.removeListener("onDataChangedEvent", this.loadDeck);
+    
   }
 
   loadDeck = () => {
-    const { deckId } = this.props.navigation.state.params;
     const { title } = this.props.navigation.state.params;
-    console.log(deckId);
     getDeck(title).then(deck => this.setState({ deck }));
+
   };
   addCard = () => {
     const { navigation } = this.props;
@@ -72,9 +76,22 @@ export class DeckView extends React.Component {
     this.props.navigation.navigate("Quiz", { title });
   };
 
+//   navigateToListDecks(){
+//     const resetAction = NavigationActions.reset({
+//         index: 0,
+//         actions: [
+//           NavigationActions.navigate({
+//             routeName: "ListDecks"
+//           })
+//         ]
+//       });
+//       this.props.navigation.dispatch(resetAction);
+//   }
+  
   render() {
     const { params } = this.props.navigation.state;
     const { deck } = this.state;
+   
 
     if (!deck) {
       return <Text>Deck not found</Text>;
@@ -89,6 +106,9 @@ export class DeckView extends React.Component {
           alignItems: "center"
         }}
       >
+        {/* <TouchableHighlight onPress={ () => this.navigateToListDecks() } style={{marginLeft:-280}}>
+            <Text>GO To ListDecks</Text>
+        </TouchableHighlight> */}
         <Card title={deck.title}>
           <Badge
             value={deck.questions.length}
@@ -98,7 +118,7 @@ export class DeckView extends React.Component {
             Create a Card and/or take a Quiz
           </Text>
         </Card>
-
+        
         <View style={styles.buttonsContainer}>
           <Button
             text="Add Card"
